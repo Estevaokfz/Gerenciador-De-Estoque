@@ -6,6 +6,10 @@ namespace GerenciadorEstoque
     public class MainForm : Form
     {
         private MenuStrip menuStrip;
+        private ToolStripMenuItem menuCadastro;
+        private ToolStripMenuItem menuEstoque;
+        private ToolStripMenuItem menuCadastroProduto;
+        private ToolStripMenuItem menuCadastroCategoria;
 
         public MainForm()
         {
@@ -15,14 +19,15 @@ namespace GerenciadorEstoque
             this.Height = 600;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Menu Strip
+            // Inicializando o Menu Strip
             menuStrip = new MenuStrip();
-            var menuCadastro = new ToolStripMenuItem("Cadastro");
-            var menuEstoque = new ToolStripMenuItem("Estoque");
+            menuCadastro = new ToolStripMenuItem("Cadastro");
+            menuEstoque = new ToolStripMenuItem("Estoque");
 
-            var menuCadastroProduto = new ToolStripMenuItem("Produtos");
-            var menuCadastroCategoria = new ToolStripMenuItem("Categorias");
+            menuCadastroProduto = new ToolStripMenuItem("Produtos");
+            menuCadastroCategoria = new ToolStripMenuItem("Categorias");
 
+            // Adicionando itens no menu
             menuCadastro.DropDownItems.Add(menuCadastroProduto);
             menuCadastro.DropDownItems.Add(menuCadastroCategoria);
 
@@ -33,17 +38,30 @@ namespace GerenciadorEstoque
             this.Controls.Add(menuStrip);
 
             // Eventos de Clique
-            menuCadastroProduto.Click += (s, e) =>
-            {
-                var form = new CadastroProdutoForm();
-                form.ShowDialog();
-            };
-
-            menuCadastroCategoria.Click += (s, e) =>
-            {
-                var form = new CadastroCategoriaForm();
-                form.ShowDialog();
-            };
+            menuCadastroProduto.Click += (s, e) => AbrirCadastroProduto();
+            menuCadastroCategoria.Click += (s, e) => AbrirCadastroCategoria();
         }
+
+        private void AbrirCadastroProduto()
+        {
+            using (var form = new CadastroProdutoForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void AbrirCadastroCategoria()
+        {
+            using (var form = new CadastroCategoriaForm())
+            {
+                form.ShowDialog();
+            }
+
+            // Recarrega as categorias no formulário de produtos
+            var cadastroProdutoForm = new CadastroProdutoForm();
+            cadastroProdutoForm.CarregarCategorias();
+        }
+
+
     }
 }
