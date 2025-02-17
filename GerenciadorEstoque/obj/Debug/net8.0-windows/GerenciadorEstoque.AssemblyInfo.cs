@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GerenciadorEstoque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+471a1e2d1e034a43634d8985e8e952eadacbdbce")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5cef19c19b8eb498f816966d2727db49a3d02d18")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("GerenciadorEstoque")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GerenciadorEstoque")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
