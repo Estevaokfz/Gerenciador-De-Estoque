@@ -18,7 +18,7 @@ namespace GerenciadorEstoque.Repositories
 
 
 
-        public static List<Categoria> ListarTodas()
+        public static List<Categoria> ListarTodos()
         {
             return categorias;
         }

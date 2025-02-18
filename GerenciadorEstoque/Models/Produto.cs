@@ -7,7 +7,7 @@ namespace GerenciadorEstoque.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Categoria { get; set; }
+        public Categoria Categoria { get; set; }
         public int Quantidade { get; set; }
         public decimal Preco
         {

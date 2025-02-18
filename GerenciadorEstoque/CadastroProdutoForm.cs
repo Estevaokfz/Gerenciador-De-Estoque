@@ -58,41 +58,42 @@ namespace GerenciadorEstoque
 
         public void CarregarCategorias()
         {
-            cmbCategoria.Items.Clear();  // Limpa as categorias existentes no ComboBox
+            // Obtém todas as categorias do repositório
+            var categorias = CategoriaRepository.ListarTodos();
 
-            var categorias = CategoriaRepository.ListarTodas();  // Obtém todas as categorias do repositório
-            if (categorias.Any())
-            {
-                // Adiciona todas as categorias ao ComboBox
-                cmbCategoria.Items.AddRange(categorias.Select(c => c.Nome).ToArray());
-            }
-            else
-            {
-                cmbCategoria.Items.Add("Nenhuma categoria cadastrada");  // Mensagem caso não haja categorias
-            }
-
-            cmbCategoria.SelectedIndex = -1;  // Desmarca qualquer seleçãoclea
+            // Define a origem de dados da ComboBox com as categorias
+            cmbCategoria.DataSource = categorias;
+            cmbCategoria.DisplayMember = "Nome"; // O que vai aparecer na interface
+            cmbCategoria.ValueMember = "Id";     // O valor interno que fica "escondido"
         }
+
 
 
 
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos())
-                return;
-
-            Produto produto = new Produto
+            // Verifica se há uma categoria selecionada
+            if (cmbCategoria.SelectedItem is Categoria categoriaSelecionada)
             {
-                Nome = txtNome.Text,
-                Categoria = cmbCategoria.Text,
-                Quantidade = (int)numQuantidade.Value,
-                Preco = decimal.Parse(txtPreco.Text)
-            };
+                // Cria um novo produto com as informações preenchidas
+                Produto novoProduto = new Produto
+                {
+                    Nome = txtNome.Text,
+                    Categoria = categoriaSelecionada,  // Aqui agora vai o objeto completo
+                    Preco = decimal.Parse(txtPreco.Text),
+                    Quantidade = int.Parse(numQuantidade.Text)
+                };
 
-            ProdutoRepository.Adicionar(produto);
+                // Adiciona o produto ao repositório
+                ProdutoRepository.Adicionar(novoProduto);
 
-            MessageBox.Show("Produto salvo com sucesso!");
-            LimparCampos();
+                MessageBox.Show("Produto cadastrado com sucesso!");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Selecione uma categoria válida.");
+            }
         }
 
         private bool ValidarCampos()

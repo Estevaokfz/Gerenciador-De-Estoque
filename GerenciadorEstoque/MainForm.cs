@@ -10,6 +10,7 @@ namespace GerenciadorEstoque
         private ToolStripMenuItem menuEstoque;
         private ToolStripMenuItem menuCadastroProduto;
         private ToolStripMenuItem menuCadastroCategoria;
+        private ToolStripMenuItem menuListagemProduto;
 
         public MainForm()
         {
@@ -26,10 +27,12 @@ namespace GerenciadorEstoque
 
             menuCadastroProduto = new ToolStripMenuItem("Produtos");
             menuCadastroCategoria = new ToolStripMenuItem("Categorias");
+            menuListagemProduto = new ToolStripMenuItem("Listar Produtos");
 
             // Adicionando itens no menu
             menuCadastro.DropDownItems.Add(menuCadastroProduto);
             menuCadastro.DropDownItems.Add(menuCadastroCategoria);
+            menuEstoque.DropDownItems.Add(menuListagemProduto);
 
             menuStrip.Items.Add(menuCadastro);
             menuStrip.Items.Add(menuEstoque);
@@ -40,6 +43,7 @@ namespace GerenciadorEstoque
             // Eventos de Clique
             menuCadastroProduto.Click += (s, e) => AbrirCadastroProduto();
             menuCadastroCategoria.Click += (s, e) => AbrirCadastroCategoria();
+            menuListagemProduto.Click += (s, e) => AbrirListagemProduto();
         }
 
         private void AbrirCadastroProduto()
@@ -56,12 +60,14 @@ namespace GerenciadorEstoque
             {
                 form.ShowDialog();
             }
-
-            // Recarrega as categorias no formulário de produtos
-            var cadastroProdutoForm = new CadastroProdutoForm();
-            cadastroProdutoForm.CarregarCategorias();
         }
 
-
+        private void AbrirListagemProduto()
+        {
+            using (var form = new ListagemProdutosForm())
+            {
+                form.ShowDialog();
+            }
+        }
     }
 }
