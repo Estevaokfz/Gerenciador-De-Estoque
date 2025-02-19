@@ -64,10 +64,11 @@ namespace GerenciadorEstoque
 
         private void AbrirListagemProduto()
         {
-            using (var form = new ListagemProdutosForm())
+            using (var form = new ListagemProdutoForm())
             {
                 form.ShowDialog();
             }
         }
+        
     }
 }

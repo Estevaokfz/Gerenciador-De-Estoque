@@ -5,19 +5,19 @@ namespace GerenciadorEstoque.Models
 
     public class Produto
     {
-        public int Id { get; set; }
+       public int Id { get; set; }
         public string Nome { get; set; }
         public Categoria Categoria { get; set; }
         public int Quantidade { get; set; }
-        public decimal Preco
+        public decimal Valor
         {
-            get => _preco;
+            get => _Valor ;
             set
             {
                 if (value < 0) throw new ArgumentException("O preço não pode ser negativo.");
-                _preco = value;
+                _Valor  = value;
             }
         }
-        private decimal _preco;
+        private decimal _Valor ;
     }
 }
